@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowTTS Voice Chat</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="background-orb orb-a"></div>
+      <div class="background-orb orb-b"></div>
+
+      <main class="app-card">
+        <section class="hero">
+          <p class="eyebrow">FastAPI + ZhipuAI + Browser Voice</p>
+          <h1>本地语音输入，流式语音回复</h1>
+          <p class="hero-copy">
+            用浏览器麦克风说话，后端通过智谱 AI 做流式对话，前端边收边播，优先保证首字快、首句快。
+          </p>
+        </section>
+
+        <section class="status-grid">
+          <div class="status-card">
+            <span class="status-label">连接状态</span>
+            <strong id="socketStatus">连接中</strong>
+          </div>
+          <div class="status-card">
+            <span class="status-label">识别状态</span>
+            <strong id="recognitionStatus">未启动</strong>
+          </div>
+          <div class="status-card">
+            <span class="status-label">播报状态</span>
+            <strong id="speechStatus">待机</strong>
+          </div>
+        </section>
+
+        <section class="control-panel">
+          <div class="button-row">
+            <button id="startVoiceButton" class="primary-button">开始说话</button>
+            <button id="stopVoiceButton" class="secondary-button" disabled>停止录音</button>
+            <button id="clearButton" class="ghost-button">清空上下文</button>
+          </div>
+          <p class="helper-text">
+            推荐使用桌面版 Chrome 或 Edge。若浏览器不支持语音识别，仍可直接输入文字测试流式回复。
+          </p>
+        </section>
+
+        <section class="manual-input">
+          <label for="manualInput">手动输入</label>
+          <div class="input-row">
+            <textarea id="manualInput" rows="3" placeholder="比如：帮我规划一个周末广州两日游"></textarea>
+            <button id="sendTextButton" class="primary-button">发送文本</button>
+          </div>
+        </section>
+
+        <section class="interim-panel">
+          <div>
+            <span class="panel-label">实时识别</span>
+            <p id="interimTranscript" class="interim-text">等待麦克风输入…</p>
+          </div>
+        </section>
+
+        <section class="chat-panel">
+          <div class="panel-header">
+            <span>对话记录</span>
+            <small>后端流式文本 + 前端分句播报</small>
+          </div>
+          <div id="chatLog" class="chat-log"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
